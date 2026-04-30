@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --anim-row-dur: 400ms;
+  --anim-row-ease: ease-out;
+  --anim-page-dur: 400ms;
+  --anim-page-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body {
+  background-color: #1c1c1c;
+  color: white;
+}
+
+/* ── Row: slide (default) ─────────────────────────────────────────────── */
+@keyframes rowExitLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-32px); }
+}
+@keyframes rowExitRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(32px); }
+}
+@keyframes rowEnterCheckedIn {
+  0%   { opacity: 0; transform: translateY(-20px); box-shadow: inset 0 3px 0 #80bdf0; }
+  70%  { box-shadow: inset 0 3px 0 rgba(128, 189, 240, 0.3); }
+  100% { opacity: 1; transform: translateY(0);    box-shadow: inset 0 3px 0 transparent; }
+}
+@keyframes rowEnterCheckedOut {
+  0%   { opacity: 0; transform: translateX(32px); box-shadow: inset -3px 0 0 #f36c71; }
+  70%  { box-shadow: inset -3px 0 0 rgba(243, 108, 113, 0.3); }
+  100% { opacity: 1; transform: translateX(0);  box-shadow: inset -3px 0 0 transparent; }
+}
+.row-exit-left         { animation: rowExitLeft        var(--anim-row-dur) ease-in              forwards; }
+.row-exit-right        { animation: rowExitRight       var(--anim-row-dur) ease-in              forwards; }
+.row-enter-checked-in  { animation: rowEnterCheckedIn  var(--anim-row-dur) var(--anim-row-ease) both; }
+.row-enter-checked-out { animation: rowEnterCheckedOut var(--anim-row-dur) var(--anim-row-ease) both; }
+
+/* ── Row: slide, no flash ─────────────────────────────────────────────── */
+@keyframes rowEnterFromTop   { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rowEnterRight { from { opacity: 0; transform: translateX(32px);  } to { opacity: 1; transform: translateX(0); } }
+.row-enter-left  { animation: rowEnterFromTop var(--anim-row-dur) var(--anim-row-ease) both; }
+.row-enter-right { animation: rowEnterRight   var(--anim-row-dur) var(--anim-row-ease) both; }
+
+/* ── Row: fade ────────────────────────────────────────────────────────── */
+@keyframes rowFadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rowFadeOut { from { opacity: 1; } to { opacity: 0; } }
+.row-enter-fade { animation: rowFadeIn  var(--anim-row-dur) var(--anim-row-ease) both; }
+.row-exit-fade  { animation: rowFadeOut var(--anim-row-dur) ease-in             forwards; }
+
+/* ── Row: rise ────────────────────────────────────────────────────────── */
+@keyframes rowRiseIn  { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rowSinkOut { from { opacity: 1; transform: translateY(0); }    to { opacity: 0; transform: translateY(20px); } }
+.row-enter-rise { animation: rowRiseIn  var(--anim-row-dur) var(--anim-row-ease) both; }
+.row-exit-sink  { animation: rowSinkOut var(--anim-row-dur) ease-in             forwards; }
+
+/* ── Row: scale ───────────────────────────────────────────────────────── */
+@keyframes rowScaleIn  { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes rowScaleOut { from { opacity: 1; transform: scale(1);    } to { opacity: 0; transform: scale(0.97); } }
+.row-enter-scale { animation: rowScaleIn  var(--anim-row-dur) var(--anim-row-ease) both; }
+.row-exit-scale  { animation: rowScaleOut var(--anim-row-dur) ease-in             forwards; }
+
+/* ── Page transitions ─────────────────────────────────────────────────── */
+@keyframes pageSlideIn { from { transform: translateX(48px); opacity: 0; } to { transform: translateX(0);    opacity: 1; } }
+@keyframes pageFadeIn  { from { opacity: 0; }                               to { opacity: 1; } }
+@keyframes pageRiseIn  { from { transform: translateY(32px); opacity: 0; } to { transform: translateY(0);    opacity: 1; } }
+
+.page-slide-in { animation: pageSlideIn var(--anim-page-dur) var(--anim-page-ease) both; }
+.page-fade-in  { animation: pageFadeIn  var(--anim-page-dur) var(--anim-page-ease) both; }
+.page-rise-in  { animation: pageRiseIn  var(--anim-page-dur) var(--anim-page-ease) both; }
+
+/* ── Progress bars ────────────────────────────────────────────────────── */
+@keyframes fillProgress    { from { width: 0%; } to { width: 100%; } }
+@keyframes progressBarFill { from { width: 0%; } to { width: 100%; } }
