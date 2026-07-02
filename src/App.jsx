@@ -5,6 +5,7 @@ import StoreSummary from './components/StoreSummary'
 import VendorInsights from './components/VendorInsights'
 import SalesAndShrink from './components/SalesAndShrink'
 import FontSettings from './components/FontSettings'
+import VendorWelcome from './components/VendorWelcome'
 import { vendors as initialVendors } from './data'
 
 const TABS = ['vendor-management', 'sales-shrink']
@@ -25,6 +26,7 @@ function Dashboard({ timerDuration, setTimerDuration }) {
   const [progressKey, setProgressKey] = useState(0)
   const [checkingInId, setCheckingInId]   = useState(null)
   const [checkingOutId, setCheckingOutId] = useState(null)
+  const [welcomeVendor, setWelcomeVendor] = useState(null) // { vendor, checkedInAt }
   const { sizes } = useFonts()
 
   function handleCheckIn() {
@@ -32,11 +34,12 @@ function Dashboard({ timerDuration, setTimerDuration }) {
     if (!vendor) return
     setCheckingInId(vendor.id)
     setTimeout(() => {
+      const checkedInAt = currentTime()
       setVendors(prev => {
         const idx = prev.findIndex(v => v.id === vendor.id)
         const updated = prev.map((v, i) =>
           i === idx
-            ? { ...v, status: 'checked-in', statusDetail: `Checked In ${currentTime()}`, type: v.type || 'Delivery' }
+            ? { ...v, status: 'checked-in', statusDetail: `Checked In ${checkedInAt}`, type: v.type || 'Delivery' }
             : v
         )
         const target = updated[idx]
@@ -44,6 +47,7 @@ function Dashboard({ timerDuration, setTimerDuration }) {
         return [target, ...rest]
       })
       setCheckingInId(null)
+      setWelcomeVendor({ vendor, checkedInAt })
     }, (sizes.animRowDuration ?? 400) + 220)
   }
 
@@ -135,6 +139,15 @@ function Dashboard({ timerDuration, setTimerDuration }) {
       </div>
 
       <FontSettings timerDuration={timerDuration} setTimerDuration={setTimerDuration} />
+
+      {welcomeVendor && (
+        <VendorWelcome
+          vendor={welcomeVendor.vendor}
+          checkedInAt={welcomeVendor.checkedInAt}
+          duration={sizes.welcomeDuration ?? 60}
+          onDismiss={() => setWelcomeVendor(null)}
+        />
+      )}
     </div>
   )
 }

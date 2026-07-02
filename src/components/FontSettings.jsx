@@ -12,6 +12,7 @@ const FONT_OPTIONS = [
   { label: 'Space Grotesk', value: 'Space Grotesk' },
   { label: 'Oswald',        value: 'Oswald' },
   { label: 'Rajdhani',      value: 'Rajdhani' },
+  { label: 'Poppins',       value: 'Poppins'  },
 ]
 
 const FONT_ROLE_CONTROLS = [
@@ -35,6 +36,20 @@ const FONT_CONTROLS = [
   { key: 'vendorLogoSize',  label: 'Vendor Logo Size',  min: 20, max: 100 },
   { key: 'vendorMeta',      label: 'Vendor Meta',       min: 8,  max: 30 },
   { key: 'tableValue',      label: 'Table Values',      min: 10, max: 80 },
+]
+
+const WELCOME_FONT_CONTROLS = [
+  { key: 'welcomeHeadingSize',  label: 'Welcome Heading',    min: 24, max: 120 },
+  { key: 'welcomeLogoH',        label: 'Vendor Logo Height', min: 40, max: 200 },
+  { key: 'welcomeSectionTitle', label: 'Section Title',      min: 10, max: 50  },
+  { key: 'welcomeKpiLabel',     label: 'KPI Label',          min: 8,  max: 40  },
+  { key: 'welcomeKpiValue',     label: 'KPI Value',          min: 14, max: 80  },
+  { key: 'welcomeUpliftText',   label: 'Uplift Text',        min: 10, max: 40  },
+  { key: 'welcomeColHeader',    label: 'Column Header',      min: 8,  max: 40  },
+  { key: 'welcomeRowPrimary',   label: 'Row Primary (UPC)',  min: 10, max: 40  },
+  { key: 'welcomeRowValue',     label: 'Row Value',          min: 10, max: 60  },
+  { key: 'welcomeRecTitle',     label: 'Rec. Title',         min: 10, max: 40  },
+  { key: 'welcomeRecDesc',      label: 'Rec. Description',   min: 8,  max: 36  },
 ]
 
 const SS_FONT_CONTROLS = [
@@ -178,7 +193,7 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 bg-[#333] hover:bg-[#444] text-white p-3 rounded-full shadow-lg transition-colors"
+        className="fixed bottom-6 right-6 z-[10000] bg-[#333] hover:bg-[#444] text-white p-3 rounded-full shadow-lg transition-colors"
         title="Display Settings"
       >
         <Settings size={20} />
@@ -186,10 +201,10 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
 
       {open && (
         <>
-          <div className="fixed inset-0 z-50" onClick={handleClose} />
+          <div className="fixed inset-0 z-[10000]" onClick={handleClose} />
           <div
             ref={panelRef}
-            className="fixed z-[51] bg-[#1a1a1a] w-72 flex flex-col shadow-2xl"
+            className="fixed z-[10001] bg-[#1a1a1a] w-72 flex flex-col shadow-2xl"
             style={pos
               ? { left: pos.left, top: pos.top, maxHeight: '85vh', border: '1px solid #333', borderRadius: 8 }
               : { right: 0, top: 0, bottom: 0, borderLeft: '1px solid #333' }
@@ -286,6 +301,10 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
                     ))}
                     <p className="text-[10px] text-[#555] uppercase tracking-wider pt-2 border-t border-[#333]">Sales &amp; Shrink</p>
                     {SS_FONT_CONTROLS.map(c => (
+                      <Slider key={c.key} control={c} value={sizes[c.key]} onChange={v => set(c.key, v)} />
+                    ))}
+                    <p className="text-[10px] text-[#555] uppercase tracking-wider pt-2 border-t border-[#333]">Welcome Page</p>
+                    {WELCOME_FONT_CONTROLS.map(c => (
                       <Slider key={c.key} control={c} value={sizes[c.key]} onChange={v => set(c.key, v)} />
                     ))}
                   </div>
@@ -431,7 +450,48 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
 
               {tab === 'timer' && (
                 <div className="space-y-6 pt-2">
+
+                  {/* Welcome page duration */}
                   <div>
+                    <p className="text-[10px] text-[#555] uppercase tracking-wider mb-3">Welcome Page</p>
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="text-xs text-[#ccc]">Welcome Duration</label>
+                      <span className="text-sm font-mono font-bold text-white">{formatDuration(sizes.welcomeDuration ?? 60)}</span>
+                    </div>
+                    <input
+                      type="range"
+                      min={10}
+                      max={300}
+                      step={5}
+                      value={sizes.welcomeDuration ?? 60}
+                      onChange={e => set('welcomeDuration', Number(e.target.value))}
+                      className="w-full accent-blue-400"
+                    />
+                    <div className="flex justify-between text-[10px] text-[#666] mt-1">
+                      <span>10s</span>
+                      <span>1m</span>
+                      <span>2m</span>
+                      <span>5m</span>
+                    </div>
+                    <div className="flex gap-2 mt-2">
+                      {[30, 60, 120, 180].map(s => (
+                        <button
+                          key={s}
+                          onClick={() => set('welcomeDuration', s)}
+                          className={`flex-1 py-1 rounded text-xs font-medium transition-colors ${
+                            (sizes.welcomeDuration ?? 60) === s
+                              ? 'bg-blue-500 text-white'
+                              : 'bg-[#2a2a2a] text-[#ccc] hover:bg-[#333]'
+                          }`}
+                        >
+                          {formatDuration(s)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-[#333] pt-4">
+                    <p className="text-[10px] text-[#555] uppercase tracking-wider mb-3">Screen Rotation</p>
                     <div className="flex items-center justify-between mb-2">
                       <label className="text-xs text-[#ccc]">Screen Duration</label>
                       <span className="text-sm font-mono font-bold text-white">{formatDuration(timerDuration)}</span>
@@ -541,7 +601,7 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
           })
         }
         return (
-          <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70" onClick={() => setExportOpen(false)}>
+          <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-black/70" onClick={() => setExportOpen(false)}>
             <div className="bg-[#1a1a1a] border border-[#333] rounded-xl shadow-2xl w-[560px] max-h-[80vh] flex flex-col" onClick={e => e.stopPropagation()}>
               <div className="flex items-center justify-between px-4 py-3 border-b border-[#333] flex-shrink-0">
                 <div>

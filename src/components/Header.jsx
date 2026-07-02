@@ -31,6 +31,7 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
         <div className="flex items-center gap-3">
           <img src={freshCartLogo} alt="Fresh Cart" style={{ height: sizes.headerTitle * 1.1 }} />
           <span className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>DSD Dash</span>
+          <span className="px-2 py-0.5 rounded-md bg-yellow-400 text-[#2a2a2a] font-bold" style={{ fontSize: sizes.headerTitle * 0.6 }}>PLAYGROUND</span>
           <div className="w-px self-stretch bg-white opacity-40" />
           <span className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>CI 351</span>
         </div>

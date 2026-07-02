@@ -57,6 +57,19 @@ export const defaults = {
   ssTlColFlexes:    [1, 1, 1, 1, 1, 1], // Dept Markdowns: [Dept, MD Units, Loss Units, Total Loss $, MD Eff, Loss No MD]
   // Sales & Shrink pagination
   ssPagDuration:    5,
+  // Vendor Welcome page
+  welcomeDuration:      60,  // seconds to display welcome page
+  welcomeHeadingSize:   60,  // "Welcome, John S." font size (px)
+  welcomeLogoH:         80,  // vendor logo box height (px)
+  welcomeSectionTitle:  20,  // section header text (Exec Summary, Top Loss, Recommendations)
+  welcomeKpiLabel:      20,  // KPI label (In Stock Score, Actual Sales, etc.)
+  welcomeKpiValue:      30,  // KPI large value (92.86%, $56,193, etc.)
+  welcomeUpliftText:    18,  // Vendor Uplift body text
+  welcomeColHeader:     18,  // column header row in Top Loss table
+  welcomeRowPrimary:    20,  // row primary text (UPC)
+  welcomeRowValue:      24,  // row values (ISS %, Lost Sales $, Days off Sale)
+  welcomeRecTitle:      20,  // recommendation title
+  welcomeRecDesc:       17,  // recommendation description text
 }
 
 function loadSaved() {
