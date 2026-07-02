@@ -30,7 +30,7 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
         {/* Title */}
         <div className="flex items-center gap-3">
           <img src={freshCartLogo} alt="Fresh Cart" style={{ height: sizes.headerTitle * 1.1 }} />
-          <span className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>DSD Dashboard</span>
+          <span className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>DSD Dash</span>
           <div className="w-px self-stretch bg-white opacity-40" />
           <span className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>CI 351</span>
         </div>

@@ -20,6 +20,7 @@ export default function StoreSummary() {
             {...item}
             roundedBl={i === 0}
             roundedBr={i === storeSummary.length - 1}
+            showRobot={i === 0}
           />
         ))}
       </div>
@@ -27,15 +28,19 @@ export default function StoreSummary() {
   )
 }
 
-function KpiCard({ label, valueDisplay, subLabel, subLabel2, isGood, roundedBl, roundedBr }) {
+function KpiCard({ label, valueDisplay, subLabel, subLabel2, isGood, roundedBl, roundedBr, showRobot }) {
   const { sizes } = useFonts()
   const valueColor = isGood ? 'text-[#71cc98]' : 'text-[#f36c71]'
 
   return (
     <div
-      className={`bg-[#383838] flex-1 flex flex-col items-center justify-center text-center px-3 ${roundedBl ? 'rounded-bl-xl' : ''} ${roundedBr ? 'rounded-br-xl' : ''}`}
+      className={`bg-[#383838] flex-1 flex items-center justify-center px-3 ${showRobot ? 'flex-row gap-3' : 'flex-col text-center'} ${roundedBl ? 'rounded-bl-xl' : ''} ${roundedBr ? 'rounded-br-xl' : ''}`}
       style={{ paddingTop: sizes.kpiPY, paddingBottom: sizes.kpiPY }}
     >
+      {showRobot && (
+        <img src="/robot.png" alt="Robot" style={{ height: sizes.summaryValue * 3.5, objectFit: 'contain', flexShrink: 0 }} />
+      )}
+      <div className={`flex flex-col ${showRobot ? 'items-center text-center' : 'items-center w-full'}`}>
       <div
         className="font-bold text-white w-full"
         style={{ fontSize: sizes.summaryLabel, lineHeight: sizes.lineHeight }}
@@ -53,6 +58,7 @@ function KpiCard({ label, valueDisplay, subLabel, subLabel2, isGood, roundedBl, 
       </div>
       <div className="font-light text-white w-full" style={{ fontSize: sizes.summarySubLabel2, lineHeight: sizes.lineHeight }}>
         {subLabel2}
+      </div>
       </div>
     </div>
   )

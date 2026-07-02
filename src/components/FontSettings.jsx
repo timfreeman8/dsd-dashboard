@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Settings, X, RotateCcw, Save, Check, ChevronUp, ChevronDown } from 'lucide-react'
+import { Settings, X, RotateCcw, Save, Check, ChevronUp, ChevronDown, Code2, Copy } from 'lucide-react'
 import { useFonts } from '../FontContext'
 import { COLUMNS } from './VendorInsights'
 
@@ -94,10 +94,40 @@ function formatDuration(secs) {
   return s === 0 ? `${m}m` : `${m}m ${s}s`
 }
 
+function generateExport(sizes, timerDuration) {
+  const groups = [
+    { comment: '// Font sizes', keys: ['headerTitle','headerTab','headerTimestamp','summaryLabel','summaryValue','summarySubLabel','summarySubLabel2','tableHeader','tableSubHeader','sectionLabel','vendorName','vendorMeta','tableValue'] },
+    { comment: '// Line height', keys: ['lineHeight'] },
+    { comment: '// Spacing (px)', keys: ['progressBarH','headerPY','sectionLabelPY','kpiPY','rowPY','pagePadding','sectionGap','columnGap','pageDuration'] },
+    { comment: '// Columns', keys: ['columnOrder','columnFlexes','vendorColFlex','vendorLogoSize'] },
+    { comment: '// Fonts', keys: ['fontBody','fontHeading','fontDisplay'] },
+    { comment: '// Animations', keys: ['animRowStyle','animRowDuration','animPageStyle','animPageDuration','animEasing'] },
+    { comment: '// Sales & Shrink font sizes', keys: ['ssPanelTitle','ssErLabel','ssErValue','ssColHeader','ssRowUpc','ssRowDesc','ssRowValue'] },
+    { comment: '// Sales & Shrink column flex widths', keys: ['ssErColFlexes','ssZsColFlexes','ssTlColFlexes'] },
+    { comment: '// Sales & Shrink pagination', keys: ['ssPagDuration'] },
+  ]
+  const lines = ['export const defaults = {']
+  for (const { comment, keys } of groups) {
+    lines.push(`  ${comment}`)
+    for (const key of keys) {
+      const val = sizes[key]
+      lines.push(`  ${key}: ${JSON.stringify(val)},`)
+    }
+  }
+  lines.push('}')
+  lines.push('')
+  lines.push('// ─── App.jsx ───────────────────────────────────────────────────────────────')
+  lines.push(`// Change the timerDuration default (line: useState(30)):`)
+  lines.push(`// const [timerDuration, setTimerDuration] = useState(${timerDuration})`)
+  return lines.join('\n')
+}
+
 export default function FontSettings({ timerDuration, setTimerDuration }) {
   const [open, setOpen] = useState(false)
   const [tab, setTab] = useState('fonts')
   const [saved, setSaved] = useState(false)
+  const [exportOpen, setExportOpen] = useState(false)
+  const [copiedExport, setCopiedExport] = useState(false)
   const [pos, setPos] = useState(null) // null = docked right, {left, top} = floating
   const panelRef = useRef(null)
   const { sizes, set, save, reset } = useFonts()
@@ -179,6 +209,13 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
                   title="Reset to defaults (clears saved)"
                 >
                   <RotateCcw size={14} />
+                </button>
+                <button
+                  onClick={() => setExportOpen(true)}
+                  className="text-[#aaa] hover:text-white transition-colors"
+                  title="Export settings as hardcoded values"
+                >
+                  <Code2 size={14} />
                 </button>
                 <button
                   onClick={handleSave}
@@ -495,6 +532,44 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
           </div>
         </>
       )}
+      {exportOpen && (() => {
+        const code = generateExport(sizes, timerDuration)
+        function handleCopy() {
+          navigator.clipboard.writeText(code).then(() => {
+            setCopiedExport(true)
+            setTimeout(() => setCopiedExport(false), 2000)
+          })
+        }
+        return (
+          <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70" onClick={() => setExportOpen(false)}>
+            <div className="bg-[#1a1a1a] border border-[#333] rounded-xl shadow-2xl w-[560px] max-h-[80vh] flex flex-col" onClick={e => e.stopPropagation()}>
+              <div className="flex items-center justify-between px-4 py-3 border-b border-[#333] flex-shrink-0">
+                <div>
+                  <h2 className="text-sm font-bold text-white">Export Display Settings</h2>
+                  <p className="text-[11px] text-[#666] mt-0.5">Replace the <code className="text-[#aaa]">defaults</code> object in <code className="text-[#aaa]">src/FontContext.jsx</code> with this</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleCopy}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold transition-all ${
+                      copiedExport ? 'bg-green-600 text-white' : 'bg-blue-500 hover:bg-blue-400 text-white'
+                    }`}
+                  >
+                    {copiedExport ? <Check size={12} /> : <Copy size={12} />}
+                    {copiedExport ? 'Copied!' : 'Copy'}
+                  </button>
+                  <button onClick={() => setExportOpen(false)} className="text-[#aaa] hover:text-white transition-colors">
+                    <X size={16} />
+                  </button>
+                </div>
+              </div>
+              <pre className="flex-1 overflow-y-auto px-4 py-3 text-[11px] font-mono text-[#ccc] leading-relaxed whitespace-pre">
+                {code}
+              </pre>
+            </div>
+          </div>
+        )
+      })()}
     </>
   )
 }

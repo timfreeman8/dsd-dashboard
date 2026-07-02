@@ -15,8 +15,7 @@ export const storeSummary = [
   { label: 'Robot\nOut of Stock',         valueDisplay: '113',   subLabel: 'Total Count',   subLabel2: 'As of Last Scan',   isGood: false },
   { label: 'DSD\nCredits',                valueDisplay: '3.42%', subLabel: 'Goal ≥ 2.50%', subLabel2: 'Last 30 Days',      isGood: true  },
   { label: 'GlobalWorx\nUnresolved Issues', valueDisplay: '5',  subLabel: 'Goal ≤ 2',     subLabel2: 'Current Week',      isGood: false },
-  { label: 'Vendor Not\nChecked In',       valueDisplay: '6',    subLabel: 'Goal ≤ 2',     subLabel2: 'Current Week',      isGood: false },
-  { label: 'Vendors Not\nChecked Out',     valueDisplay: '0',    subLabel: 'Goal ≤ 2',     subLabel2: 'Current Week',      isGood: true  },
+{ label: 'Vendors Not\nChecked Out',     valueDisplay: '0',    subLabel: 'Goal ≤ 2',     subLabel2: 'Current Week',      isGood: true  },
   { label: 'Open\nInvoices',              valueDisplay: '1',    subLabel: 'Older than',    subLabel2: '5 days',            isGood: false },
 ]
 
