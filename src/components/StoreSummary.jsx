@@ -8,7 +8,7 @@ export default function StoreSummary() {
     <div className="flex-shrink-0 flex flex-col gap-0.5">
       {/* Title bar */}
       <div className="bg-[#424242] rounded-t-xl px-6 py-3 text-center">
-        <span className="font-bold text-white" style={{ fontSize: sizes.tableHeader, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>
+        <span data-skey="tableHeader" className="font-bold text-white" style={{ fontSize: sizes.tableHeader, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>
           DSD Store Summary
         </span>
       </div>
@@ -42,21 +42,23 @@ function KpiCard({ label, valueDisplay, subLabel, subLabel2, isGood, roundedBl, 
       )}
       <div className={`flex flex-col ${showRobot ? 'items-center text-center' : 'items-center w-full'}`}>
       <div
+        data-skey="summaryLabel"
         className="font-bold text-white w-full"
         style={{ fontSize: sizes.summaryLabel, lineHeight: sizes.lineHeight }}
       >
         {label.split('\n').map((line, i) => <div key={i}>{line}</div>)}
       </div>
       <div
+        data-skey="summaryValue"
         className={`font-bold w-full ${valueColor}`}
         style={{ fontSize: sizes.summaryValue, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontDisplay}', sans-serif` }}
       >
         {valueDisplay}
       </div>
-      <div className="font-light text-white w-full" style={{ fontSize: sizes.summarySubLabel, lineHeight: sizes.lineHeight }}>
+      <div data-skey="summarySubLabel" className="font-light text-white w-full" style={{ fontSize: sizes.summarySubLabel, lineHeight: sizes.lineHeight }}>
         {subLabel}
       </div>
-      <div className="font-light text-white w-full" style={{ fontSize: sizes.summarySubLabel2, lineHeight: sizes.lineHeight }}>
+      <div data-skey="summarySubLabel2" className="font-light text-white w-full" style={{ fontSize: sizes.summarySubLabel2, lineHeight: sizes.lineHeight }}>
         {subLabel2}
       </div>
       </div>

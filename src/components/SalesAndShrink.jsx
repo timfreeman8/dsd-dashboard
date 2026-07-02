@@ -137,25 +137,25 @@ function ReclamationPanel({ sizes, outerPageKey }) {
   return (
     <div className="flex-1 flex flex-col min-h-0 gap-0.5">
       <div className="bg-[#424242] rounded-t-xl px-5 py-0.5 text-center flex-shrink-0">
-        <span className="font-bold text-white" style={{ fontSize: ssPanelTitle, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+        <span data-skey="ssPanelTitle" className="font-bold text-white" style={{ fontSize: ssPanelTitle, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
           Reclamation (Previous Week)
         </span>
       </div>
 
       <div className="flex gap-0.5 flex-shrink-0">
         <div className="flex-1 bg-[#383838] flex flex-col items-center justify-center text-center py-1">
-          <span className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+          <span data-skey="ssErLabel" className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
             Total Reclaim
           </span>
-          <span className="font-bold" style={{ color: GREEN, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+          <span data-skey="ssErValue" className="font-bold" style={{ color: GREEN, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
             ${totalReclaim.toLocaleString()}
           </span>
         </div>
         <div className="flex-1 bg-[#383838] flex flex-col items-center justify-center text-center py-1">
-          <span className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+          <span data-skey="ssErLabel" className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
             Scanned at Reclaim (HOLD)
           </span>
-          <span className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+          <span data-skey="ssErValue" className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
             ${reclaimHold.toLocaleString()}
           </span>
         </div>
@@ -164,13 +164,13 @@ function ReclamationPanel({ sizes, outerPageKey }) {
       {/* Column headers */}
       <div className="bg-[#424242] flex items-center gap-6 px-3 py-2 flex-shrink-0">
         <div style={{ flex: flexes[0] }}>
-          <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Event</span>
+          <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Event</span>
         </div>
         <div style={{ flex: flexes[1] }}>
-          <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Store Response</span>
+          <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Store Response</span>
         </div>
         <div style={{ flex: flexes[2] }}>
-          <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>$ Received</span>
+          <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>$ Received</span>
         </div>
       </div>
 
@@ -183,20 +183,20 @@ function ReclamationPanel({ sizes, outerPageKey }) {
               className="bg-[#383838] flex items-center gap-6 px-3 py-2"
             >
               <div style={{ flex: flexes[0], minWidth: 0 }}>
-                <div className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif` }}>
+                <div data-skey="ssRowUpc" className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif` }}>
                   {ev.id}
                 </div>
-                <div className="text-white" style={{ fontSize: ssRowDesc, lineHeight, fontFamily: `'${fontBody}', sans-serif`, fontWeight: 'normal' }}>
+                <div data-skey="ssRowDesc" className="text-white" style={{ fontSize: ssRowDesc, lineHeight, fontFamily: `'${fontBody}', sans-serif`, fontWeight: 'normal' }}>
                   {ev.name}
                 </div>
               </div>
               <div style={{ flex: flexes[1] }}>
-                <span className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+                <span data-skey="ssRowValue" className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
                   {ev.storeResponse}
                 </span>
               </div>
               <div style={{ flex: flexes[2] }}>
-                <span className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+                <span data-skey="ssRowValue" className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
                   ${ev.received > 0 ? ev.received.toLocaleString() : '0'}
                 </span>
               </div>
@@ -262,25 +262,25 @@ function TopLossNoMarkdownsPanel({ sizes, outerPageKey }) {
   return (
     <div className="flex-1 flex flex-col min-h-0 gap-0.5">
       <div className="bg-[#424242] rounded-t-xl px-5 py-0.5 text-center flex-shrink-0">
-        <span className="font-bold text-white" style={{ fontSize: ssPanelTitle, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+        <span data-skey="ssPanelTitle" className="font-bold text-white" style={{ fontSize: ssPanelTitle, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
           Top Loss No Markdowns
         </span>
       </div>
 
       <div className="flex gap-0.5 flex-shrink-0">
         <div className="flex-1 bg-[#383838] flex flex-col items-center justify-center text-center py-1">
-          <span className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+          <span data-skey="ssErLabel" className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
             Items with Zero Sales
           </span>
-          <span className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+          <span data-skey="ssErValue" className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
             {itemsWithZeroSales}
           </span>
         </div>
         <div className="flex-1 bg-[#383838] flex flex-col items-center justify-center text-center py-1">
-          <span className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+          <span data-skey="ssErLabel" className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
             Total Shipped Cost
           </span>
-          <span className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+          <span data-skey="ssErValue" className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
             {totalShippedCost}
           </span>
         </div>
@@ -289,13 +289,13 @@ function TopLossNoMarkdownsPanel({ sizes, outerPageKey }) {
       {/* Column headers — all left-aligned */}
       <div className="bg-[#424242] flex items-center gap-2 px-3 py-2 flex-shrink-0">
         <div style={{ flex: flexes[0] }}>
-          <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>UPC &amp; Description</span>
+          <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>UPC &amp; Description</span>
         </div>
         <div style={{ flex: flexes[1] }}>
-          <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Total Units</span>
+          <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Total Units</span>
         </div>
         <div style={{ flex: flexes[2] }}>
-          <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Shipped Cost</span>
+          <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Shipped Cost</span>
         </div>
       </div>
 
@@ -308,20 +308,20 @@ function TopLossNoMarkdownsPanel({ sizes, outerPageKey }) {
               className="bg-[#383838] flex items-center gap-2 px-3 py-1"
             >
               <div style={{ flex: flexes[0] }}>
-                <div className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif` }}>
+                <div data-skey="ssRowUpc" className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif` }}>
                   {item.upc}
                 </div>
-                <div className="text-white" style={{ fontSize: ssRowDesc, lineHeight, fontFamily: `'${fontBody}', sans-serif`, fontWeight: 'normal' }}>
+                <div data-skey="ssRowDesc" className="text-white" style={{ fontSize: ssRowDesc, lineHeight, fontFamily: `'${fontBody}', sans-serif`, fontWeight: 'normal' }}>
                   {item.description}
                 </div>
               </div>
               <div style={{ flex: flexes[1] }}>
-                <span className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+                <span data-skey="ssRowValue" className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
                   {item.units ?? ''}
                 </span>
               </div>
               <div style={{ flex: flexes[2] }}>
-                <span className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+                <span data-skey="ssRowValue" className="font-bold text-white" style={{ fontSize: ssRowValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
                   {item.shippedCost}
                 </span>
               </div>
@@ -402,7 +402,7 @@ function DepartmentMarkdownsPanel({ sizes, outerPageKey }) {
   return (
     <div className="flex-1 flex flex-col min-h-0 gap-0.5">
       <div className="bg-[#424242] rounded-t-xl px-5 py-0.5 text-center flex-shrink-0">
-        <span className="font-bold text-white" style={{ fontSize: ssPanelTitle, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+        <span data-skey="ssPanelTitle" className="font-bold text-white" style={{ fontSize: ssPanelTitle, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
           Department Markdowns &amp; Scanned Loss
         </span>
       </div>
@@ -410,10 +410,10 @@ function DepartmentMarkdownsPanel({ sizes, outerPageKey }) {
       <div className="flex gap-0.5 flex-shrink-0">
         {kpiCards.map(({ label, value }) => (
           <div key={label} className="flex-1 bg-[#383838] flex flex-col items-center justify-center text-center py-1">
-            <span className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
+            <span data-skey="ssErLabel" className="font-bold text-white" style={{ fontSize: ssErLabel, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>
               {label}
             </span>
-            <span className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+            <span data-skey="ssErValue" className="font-bold" style={{ color: RED, fontSize: ssErValue, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
               {value}
             </span>
           </div>
@@ -423,11 +423,11 @@ function DepartmentMarkdownsPanel({ sizes, outerPageKey }) {
       {/* Column headers — all left-aligned */}
       <div className="bg-[#424242] flex items-center gap-2 px-3 py-2 flex-shrink-0">
         <div style={{ flex: flexes[0] }}>
-          <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Department</span>
+          <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>Department</span>
         </div>
         {colHeaders.map((h, i) => (
           <div key={h} style={{ flex: flexes[i + 1] ?? 1 }}>
-            <span className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>{h}</span>
+            <span data-skey="ssColHeader" className="font-bold text-white" style={{ fontSize: ssColHeader, lineHeight, fontFamily: `'${fontHeading}', sans-serif` }}>{h}</span>
           </div>
         ))}
       </div>
@@ -441,10 +441,10 @@ function DepartmentMarkdownsPanel({ sizes, outerPageKey }) {
               className="bg-[#383838] flex items-center gap-2 px-3 py-1"
             >
               <div style={{ flex: flexes[0] }} className="flex items-center gap-2">
-                <span className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif` }}>
+                <span data-skey="ssRowUpc" className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif` }}>
                   {dept.dept}
                 </span>
-                <span className="text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif`, fontWeight: 'normal' }}>
+                <span data-skey="ssRowUpc" className="text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontBody}', sans-serif`, fontWeight: 'normal' }}>
                   {dept.name}
                 </span>
               </div>
@@ -456,7 +456,7 @@ function DepartmentMarkdownsPanel({ sizes, outerPageKey }) {
                 dept.lossUnitsNoMd.toLocaleString(),
               ].map((val, i) => (
                 <div key={i} style={{ flex: flexes[i + 1] ?? 1 }}>
-                  <span className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
+                  <span data-skey="ssRowUpc" className="font-bold text-white" style={{ fontSize: ssRowUpc, lineHeight, fontFamily: `'${fontDisplay}', sans-serif` }}>
                     {val}
                   </span>
                 </div>

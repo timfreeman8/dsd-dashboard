@@ -29,16 +29,17 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
       <div className="flex items-center gap-6">
         {/* Title */}
         <div className="flex items-center gap-3">
-          <img src={freshCartLogo} alt="Fresh Cart" style={{ height: sizes.headerTitle * 1.1 }} />
-          <span className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>DSD Dash</span>
+          <img data-skey="headerTitle" src={freshCartLogo} alt="Fresh Cart" style={{ height: sizes.headerTitle * 1.1 }} />
+          <span data-skey="headerTitle" className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>DSD Dash</span>
           <span className="px-2 py-0.5 rounded-md bg-yellow-400 text-[#2a2a2a] font-bold" style={{ fontSize: sizes.headerTitle * 0.6 }}>PLAYGROUND</span>
           <div className="w-px self-stretch bg-white opacity-40" />
-          <span className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>CI 351</span>
+          <span data-skey="headerTitle" className="font-bold text-white" style={{ fontSize: sizes.headerTitle, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>CI 351</span>
         </div>
 
         {/* Tabs */}
         <div className="flex items-center gap-3 ml-2">
           <button
+            data-skey="headerTab"
             onClick={() => onTabChange('vendor-management')}
             className={`px-4 py-1 rounded-full font-bold border-2 transition-colors ${
               activeTab === 'vendor-management'
@@ -50,6 +51,7 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
             Vendor Management
           </button>
           <button
+            data-skey="headerTab"
             onClick={() => onTabChange('sales-shrink')}
             className={`px-4 py-1 rounded-full font-bold border-2 transition-colors ${
               activeTab === 'sales-shrink'
@@ -65,6 +67,7 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
 
       <div className="flex items-center gap-3">
         <button
+          data-skey="headerTab"
           onClick={onReset}
           className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/40 text-white/70 font-semibold transition-all hover:border-white hover:text-white"
           style={{ fontSize: sizes.headerTab * 0.75 }}
@@ -72,6 +75,7 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
           Default
         </button>
         <button
+          data-skey="headerTab"
           onClick={onCheckIn}
           disabled={!canCheckIn}
           className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#80bdf0] text-[#80bdf0] font-semibold transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#80bdf0]/10"
@@ -81,6 +85,7 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
           Check In
         </button>
         <button
+          data-skey="headerTab"
           onClick={onCheckOut}
           disabled={!canCheckOut}
           className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#f36c71] text-[#f36c71] font-semibold transition-all disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#f36c71]/10"
@@ -89,7 +94,7 @@ export default function Header({ activeTab, onTabChange, onCheckIn, onCheckOut, 
           <LogOut size={14} />
           Check Out
         </button>
-        <span className="text-white ml-2" style={{ fontSize: sizes.headerTimestamp }}>
+        <span data-skey="headerTimestamp" className="text-white ml-2" style={{ fontSize: sizes.headerTimestamp }}>
           Updated Apr 6 at 05:31AM
         </span>
         <button

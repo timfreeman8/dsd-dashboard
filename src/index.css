@@ -71,6 +71,15 @@ body {
 .page-fade-in  { animation: pageFadeIn  var(--anim-page-dur) var(--anim-page-ease) both; }
 .page-rise-in  { animation: pageRiseIn  var(--anim-page-dur) var(--anim-page-ease) both; }
 
+/* ── Settings hover highlight ─────────────────────────────────────────── */
+[data-skey].skey-hl {
+  outline: 2px solid rgba(245, 200, 66, 0.9);
+  outline-offset: 3px;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Progress bars ────────────────────────────────────────────────────── */
 @keyframes fillProgress    { from { width: 0%; } to { width: 100%; } }
 @keyframes progressBarFill { from { width: 0%; } to { width: 100%; } }

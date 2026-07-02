@@ -88,12 +88,14 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
         {/* Welcome row */}
         <div className="flex items-center justify-between flex-shrink-0">
           <h1
+            data-skey="welcomeHeadingSize"
             className="font-bold text-white leading-none"
             style={{ fontSize: sizes.welcomeHeadingSize ?? 60, fontFamily: `'${sizes.fontHeading}', sans-serif` }}
           >
             Welcome, {vendor.repName}
           </h1>
           <div
+            data-skey="welcomeLogoH"
             className="rounded-2xl overflow-hidden flex items-center justify-center flex-shrink-0"
             style={{
               background: vendor.logoBg,
@@ -112,6 +114,7 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
         {/* Executive Summary */}
         <div className="bg-[#383838] rounded-xl overflow-hidden flex-shrink-0">
           <div
+            data-skey="welcomeSectionTitle"
             className="px-6 py-2 text-center font-bold text-white border-b border-[#2a2a2a]"
             style={{ fontSize: sizes.welcomeSectionTitle ?? 20, fontFamily: `'${sizes.fontHeading}', sans-serif` }}
           >
@@ -120,10 +123,11 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
           <div className="flex divide-x divide-[#2a2a2a]">
             {data.execSummary.map((kpi, i) => (
               <div key={i} className="flex-1 px-4 text-center" style={{ paddingTop: sizes.kpiPY, paddingBottom: sizes.kpiPY }}>
-                <div className="text-[#bbb] font-medium" style={{ fontSize: sizes.welcomeKpiLabel ?? 20 }}>
+                <div data-skey="welcomeKpiLabel" className="text-[#bbb] font-medium" style={{ fontSize: sizes.welcomeKpiLabel ?? 20 }}>
                   {kpi.label}
                 </div>
                 <div
+                  data-skey="welcomeKpiValue"
                   className={`font-bold mt-1 ${
                     kpi.isGood === true  ? 'text-[#71cc98]' :
                     kpi.isGood === false ? 'text-[#f36c71]' :
@@ -141,7 +145,7 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
         {/* Vendor Uplift */}
         <div className="bg-[#383838] rounded-xl px-5 py-3 flex items-center gap-3 flex-shrink-0">
           <Star size={22} fill="#f5c842" className="text-[#f5c842] flex-shrink-0" />
-          <p style={{ fontSize: sizes.welcomeUpliftText ?? 18 }}>
+          <p data-skey="welcomeUpliftText" style={{ fontSize: sizes.welcomeUpliftText ?? 18 }}>
             <span className="font-bold text-[#f5c842]">Vendor Uplift&nbsp;</span>
             <span className="text-white">{data.vendorUplift}</span>
           </p>
@@ -153,6 +157,7 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
           {/* Top Loss Sale Items */}
           <div className="flex-1 bg-[#383838] rounded-xl overflow-hidden flex flex-col">
             <div
+              data-skey="welcomeSectionTitle"
               className="px-5 py-2.5 text-center font-bold text-white border-b border-[#2a2a2a] flex-shrink-0"
               style={{ fontSize: sizes.welcomeSectionTitle ?? 20, fontFamily: `'${sizes.fontHeading}', sans-serif` }}
             >
@@ -163,10 +168,10 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
               className="flex px-5 border-b border-[#2a2a2a] flex-shrink-0"
               style={{ paddingTop: sizes.rowPY * 1.5, paddingBottom: sizes.rowPY * 1.5 }}
             >
-              <div className="flex-[2] text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>UPC &amp; Description</div>
-              <div className="flex-1 text-right text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>ISS</div>
-              <div className="flex-1 text-right text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>Lost Sales</div>
-              <div className="flex-1 text-right text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>Days off Sale</div>
+              <div data-skey="welcomeColHeader" className="flex-[2] text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>UPC &amp; Description</div>
+              <div data-skey="welcomeColHeader" className="flex-1 text-right text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>ISS</div>
+              <div data-skey="welcomeColHeader" className="flex-1 text-right text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>Lost Sales</div>
+              <div data-skey="welcomeColHeader" className="flex-1 text-right text-[#bbb] font-bold" style={{ fontSize: sizes.welcomeColHeader ?? 18 }}>Days off Sale</div>
             </div>
             {/* Rows */}
             <div className="flex flex-col overflow-y-auto flex-1">
@@ -177,22 +182,25 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
                   style={{ paddingTop: sizes.rowPY * 1.5, paddingBottom: sizes.rowPY * 1.5 }}
                 >
                   <div className="flex-[2]">
-                    <div className="font-bold text-white" style={{ fontSize: sizes.welcomeRowPrimary ?? 20 }}>{item.upc}</div>
+                    <div data-skey="welcomeRowPrimary" className="font-bold text-white" style={{ fontSize: sizes.welcomeRowPrimary ?? 20 }}>{item.upc}</div>
                     <div className="text-[#aaa]" style={{ fontSize: (sizes.welcomeRowPrimary ?? 20) * 0.85 }}>{item.description}</div>
                   </div>
                   <div
+                    data-skey="welcomeRowValue"
                     className={`flex-1 text-right font-bold ${item.issGood ? 'text-[#71cc98]' : 'text-white'}`}
                     style={{ fontSize: sizes.welcomeRowValue ?? 24, fontFamily: `'${sizes.fontDisplay}', sans-serif` }}
                   >
                     {item.iss}
                   </div>
                   <div
+                    data-skey="welcomeRowValue"
                     className="flex-1 text-right font-bold text-white"
                     style={{ fontSize: sizes.welcomeRowValue ?? 24, fontFamily: `'${sizes.fontDisplay}', sans-serif` }}
                   >
                     {item.lostSales}
                   </div>
                   <div
+                    data-skey="welcomeRowValue"
                     className={`flex-1 text-right font-bold ${
                       item.daysOffSale > item.daysTotal / 2 ? 'text-[#f36c71]' : 'text-white'
                     }`}
@@ -208,6 +216,7 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
           {/* Recommendations */}
           <div className="flex-1 bg-[#383838] rounded-xl overflow-hidden flex flex-col">
             <div
+              data-skey="welcomeSectionTitle"
               className="px-5 py-2.5 text-center font-bold text-white border-b border-[#2a2a2a] flex-shrink-0"
               style={{ fontSize: sizes.welcomeSectionTitle ?? 20, fontFamily: `'${sizes.fontHeading}', sans-serif` }}
             >
@@ -221,6 +230,7 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
                   style={{ paddingTop: sizes.rowPY * 2, paddingBottom: sizes.rowPY * 2 }}
                 >
                   <span
+                    data-skey="welcomeRecDesc"
                     className={`px-2 py-0.5 rounded-full font-bold flex-shrink-0 mt-0.5 ${
                       rec.priority === 'HIGH'   ? 'bg-[#f36c71] text-white' :
                       rec.priority === 'MEDIUM' ? 'bg-[#f5c842] text-[#2a2a2a]' :
@@ -231,10 +241,10 @@ export default function VendorWelcome({ vendor, checkedInAt, onDismiss, duration
                     {rec.priority}
                   </span>
                   <div>
-                    <div className="font-bold text-white" style={{ fontSize: sizes.welcomeRecTitle ?? 20 }}>
+                    <div data-skey="welcomeRecTitle" className="font-bold text-white" style={{ fontSize: sizes.welcomeRecTitle ?? 20 }}>
                       {rec.title}
                     </div>
-                    <div className="text-[#aaa] leading-snug mt-0.5" style={{ fontSize: sizes.welcomeRecDesc ?? 17 }}>
+                    <div data-skey="welcomeRecDesc" className="text-[#aaa] leading-snug mt-0.5" style={{ fontSize: sizes.welcomeRecDesc ?? 17 }}>
                       {rec.description}
                     </div>
                   </div>

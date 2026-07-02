@@ -24,37 +24,62 @@ src/
   main.jsx             # entry point
   App.jsx              # root: FontProvider wraps Dashboard
   FontContext.jsx      # global display settings (fonts, sizes, spacing, animation)
-  data.js              # all static data (vendors, KPIs, goals, sales/shrink)
-  index.css            # global styles + CSS animation keyframes
+  data.js              # all static data (vendors, KPIs, goals, sales/shrink, welcomeData)
+  index.css            # global styles + CSS animation keyframes + .skey-hl highlight rule
   components/
     Header.jsx         # nav tabs, check-in/out buttons, fullscreen toggle
     StoreSummary.jsx   # DSD Store Summary KPI row (6 cards)
     VendorInsights.jsx # vendor table with check-in/out animation
     SalesAndShrink.jsx # Sell More Lose Less tab content
-    FontSettings.jsx   # hidden settings panel (font, size, spacing, animation knobs)
+    FontSettings.jsx   # Display Settings panel (gear icon, bottom-right)
+    VendorWelcome.jsx  # full-screen vendor welcome splash (portal into document.body)
 designs/               # PNG mockups for reference
 public/logos/          # vendor logo PNGs served as static assets
+public/robot.png       # robot image used in StoreSummary KPI card
 vendor logos/          # source logo files (not served directly)
 ```
 
 ## Key Concepts
 
-### Two Tabs (auto-rotating)
+### Branches
+- **`main`** — stable baseline
+- **`playground`** — active development branch; has PLAYGROUND badge in header; pushed to `https://github.com/timfreeman8/dsd-dashboard`
+
+### Three Views
 - **Vendor Management** — Store Summary KPIs + Vendor Insights table
 - **Sell More Lose Less** — Reclamation, Top Loss No Markdowns, Dept Markdowns
-- The tabs auto-rotate on a configurable timer (default 30s). A white progress bar fills across the top to show time remaining.
+- **Vendor Welcome** — full-screen splash shown when a vendor checks in (auto-dismisses after configurable duration)
+- The two main tabs auto-rotate on a configurable timer (default 30s). A white progress bar fills across the top to show time remaining.
 
 ### Vendor Check-In/Out
 - Vendors start as `not-checked-in`. The Check In button promotes the next vendor in order to `checked-in` and moves them to the top of the list.
 - Check Out marks the most recently checked-in vendor as `checked-out`.
 - Both transitions are animated (row slide/fade). Animation style and duration are configurable via FontSettings.
 - "Default" button resets all vendors back to `not-checked-in`.
+- On check-in, `VendorWelcome` is shown as a full-screen portal (`z-[9999]`). Confetti fires on mount via `canvas-confetti`.
+
+### Vendor Welcome Page (`VendorWelcome.jsx`)
+- Rendered via `createPortal` into `document.body` to guarantee `position: fixed` resolves to viewport regardless of ancestor CSS.
+- Countdown uses `useRef` (not state) to avoid re-renders every second.
+- Progress bar animates via CSS `progressBarFill` keyframe, keyed by `vendor.id`.
+- Data shape in `data.js` per vendor: `repName`, `welcomeData: { weekLabel, execSummary[], vendorUplift, topLossItems[], recommendations[] }`.
+- `execSummary` items: `{ label, value, isGood? }`.
+- `topLossItems` items: `{ upc, description, iss, lostSales, daysOffSale, daysTotal, issGood? }`.
+- `recommendations` items: `{ priority ('HIGH'|'MEDIUM'|'LOW'), title, description }`.
 
 ### FontContext / Display Settings
 - All font sizes, spacing values, animation settings, and column layouts live in `FontContext.jsx` with defaults in the `defaults` object.
 - Settings are persisted to `localStorage` under key `dsd-display-settings`.
-- The hidden `FontSettings` panel (toggled via a secret interaction) exposes sliders/inputs for all settings.
+- The `FontSettings` panel is opened via the gear icon (bottom-right, `z-[10000]`). Panel is `z-[10001]`, export modal is `z-[10002]`.
 - CSS animation variables (`--anim-row-dur`, `--anim-page-dur`, `--anim-row-ease`, `--anim-page-ease`) are set on `document.documentElement` by FontContext.
+- Available fonts: Nunito, Inter, Barlow, Outfit, DM Sans, Space Grotesk, Oswald, Rajdhani, Poppins.
+
+### Hover-Highlight System
+- Hovering a slider in Display Settings highlights the exact elements it controls on screen with a yellow outline.
+- Implementation: `data-skey="<key>"` attributes on DOM elements; `Slider` component in FontSettings uses `document.querySelectorAll('[data-skey="..."]')` + `classList.toggle('skey-hl', on)` on mouseenter/mouseleave.
+- `.skey-hl` CSS rule in `index.css`: `outline: 2px solid rgba(245, 200, 66, 0.9)`.
+- All sliders in all three sections (Vendor Management, Sell More Lose Less, Welcome Page) have `highlightKey` and corresponding `data-skey` attributes on their target elements.
+- No React state or re-renders involved — pure DOM classList manipulation.
 
 **Default values (`src/FontContext.jsx`):**
 
@@ -106,6 +131,18 @@ vendor logos/          # source logo files (not served directly)
 | `ssZsColFlexes` | `[3.2,2,1]` | Top Loss No Markdowns columns |
 | `ssTlColFlexes` | `[1,1,1,1,1,1]` | Dept Markdowns columns |
 | `ssPagDuration` | `5` | seconds, Sales & Shrink pagination |
+| `welcomeDuration` | `60` | seconds to show welcome page |
+| `welcomeHeadingSize` | `60` | px, "Welcome, [Name]" |
+| `welcomeLogoH` | `80` | px, vendor logo box height |
+| `welcomeSectionTitle` | `20` | px, section headers |
+| `welcomeKpiLabel` | `20` | px, KPI label |
+| `welcomeKpiValue` | `30` | px, KPI value |
+| `welcomeUpliftText` | `18` | px, Vendor Uplift body |
+| `welcomeColHeader` | `18` | px, Top Loss column headers |
+| `welcomeRowPrimary` | `20` | px, UPC text |
+| `welcomeRowValue` | `24` | px, ISS/Lost Sales/Days values |
+| `welcomeRecTitle` | `20` | px, recommendation title |
+| `welcomeRecDesc` | `17` | px, recommendation description |
 
 ### Data (`src/data.js`)
 - `vendors` — array of 10 DSD vendors with per-vendor KPIs and status
@@ -122,9 +159,19 @@ vendor logos/          # source logo files (not served directly)
 - Check-in blue: `#80bdf0`
 - Default font: Nunito
 
+### Z-Index Layering
+| Layer | z-index | Element |
+|-------|---------|---------|
+| VendorWelcome overlay | `9999` | Full-screen vendor welcome portal |
+| Settings gear button | `10000` | Gear icon (always above welcome) |
+| Settings panel | `10001` | FontSettings slide-out panel |
+| Export modal | `10002` | Code export modal |
+
 ## Notes
 
 - The dashboard is intended to be viewed fullscreen (toggle via the expand icon in the header).
 - The store shown is **CI 351**; the branding uses a "Fresh Cart" logo SVG at `designs/fresh-cart.svg`.
 - The timestamp in the header ("Updated Apr 6 at 05:31AM") is currently hardcoded.
 - Data is all static/demo — no API calls.
+- `canvas-confetti` is installed for the welcome page confetti burst.
+- HMR note: `useState(initialVendors)` only runs at mount — if `data.js` is edited via HMR, reload the page to pick up new vendor fields.

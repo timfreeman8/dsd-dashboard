@@ -15,7 +15,7 @@ function ValueCell({ value, goal, format, sizes, forceColor }) {
   if (format === 'percent') display = `${value.toFixed(2)}%`
   if (format === 'dollar')  display = value < 0 ? `($${Math.abs(value).toLocaleString()})` : `$${value.toLocaleString()}`
   return (
-    <span className="font-medium" style={{ color, fontSize: sizes.tableValue, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontDisplay}', sans-serif` }}>
+    <span data-skey="tableValue" className="font-medium" style={{ color, fontSize: sizes.tableValue, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontDisplay}', sans-serif` }}>
       {display}
     </span>
   )
@@ -36,6 +36,7 @@ function TypeIcon({ type, size }) {
 function VendorLogo({ vendor, size }) {
   return (
     <div
+      data-skey="vendorLogoSize"
       className="rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center"
       style={{ width: size, height: size, backgroundColor: vendor.logoBg }}
     >
@@ -92,19 +93,19 @@ const VendorRow = forwardRef(function VendorRow({ vendor, animClass, orderedColu
       <div className="flex items-center gap-6 flex-shrink-0" style={{ flex: sizes.vendorColFlex ?? 0.3 }}>
         <VendorLogo vendor={vendor} size={logoSize} />
         <div className="flex flex-col gap-0 justify-center">
-          <span className="font-bold" style={{ color: nameColor, fontSize: sizes.vendorName, lineHeight: sizes.lineHeight }}>
+          <span data-skey="vendorName" className="font-bold" style={{ color: nameColor, fontSize: sizes.vendorName, lineHeight: sizes.lineHeight }}>
             {vendor.name}
           </span>
           {(vendor.statusDetail || (vendor.type && isCheckedIn)) && (
             <div className="flex items-center gap-6">
               {vendor.statusDetail && (
-                <span className="flex items-center gap-1" style={{ color: metaColor, fontSize: sizes.vendorMeta }}>
+                <span data-skey="vendorMeta" className="flex items-center gap-1" style={{ color: metaColor, fontSize: sizes.vendorMeta }}>
                   <StatusIcon status={vendor.status} size={iconSize} />
                   {vendor.statusDetail}
                 </span>
               )}
               {vendor.type && isCheckedIn && (
-                <span className="flex items-center gap-1" style={{ color: metaColor, fontSize: sizes.vendorMeta }}>
+                <span data-skey="vendorMeta" className="flex items-center gap-1" style={{ color: metaColor, fontSize: sizes.vendorMeta }}>
                   <TypeIcon type={vendor.type} size={iconSize} />
                   {vendor.type}
                 </span>
@@ -134,7 +135,7 @@ const VendorRow = forwardRef(function VendorRow({ vendor, animClass, orderedColu
 function SectionLabel({ label, fontSize, py, count }) {
   return (
     <div className="bg-[#424242] rounded-t-xl px-6 flex-shrink-0 flex items-center gap-2" style={{ paddingTop: py, paddingBottom: py }}>
-      <span className="font-medium text-white" style={{ fontSize }}>{label}</span>
+      <span data-skey="sectionLabel" className="font-medium text-white" style={{ fontSize }}>{label}</span>
       {count != null && (
         <span
           className="flex items-center justify-center rounded-full bg-[#6d6d6d] text-white font-bold flex-shrink-0"
@@ -394,18 +395,18 @@ export default function VendorInsights({ vendors, checkingInId, checkingOutId })
         style={{ paddingLeft: 24, paddingRight: 12, paddingTop: 8, paddingBottom: 8 }}
       >
         <div className="flex items-center flex-shrink-0" style={{ flex: sizes.vendorColFlex ?? 0.3 }}>
-          <span className="font-bold text-white" style={{ fontSize: sizes.tableHeader, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>
+          <span data-skey="tableHeader" className="font-bold text-white" style={{ fontSize: sizes.tableHeader, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>
             Vendor Insights
           </span>
         </div>
         <div className="flex-1 flex items-center justify-around text-center" style={{ gap: sizes.columnGap }}>
           {orderedColumns.map(({ heading, sub, flex, origIdx }) => (
             <div key={origIdx} style={{ flex }} className="flex flex-col items-center justify-center">
-              <span className="font-bold text-white" style={{ fontSize: sizes.tableHeader, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>
+              <span data-skey="tableHeader" className="font-bold text-white" style={{ fontSize: sizes.tableHeader, lineHeight: sizes.lineHeight, fontFamily: `'${sizes.fontHeading}', sans-serif` }}>
                 {heading.split('\n').map((l, i) => <span key={i} className="block">{l}</span>)}
               </span>
               {sub && (
-                <span className="font-light text-white" style={{ fontSize: sizes.tableSubHeader, lineHeight: sizes.lineHeight }}>
+                <span data-skey="tableSubHeader" className="font-light text-white" style={{ fontSize: sizes.tableSubHeader, lineHeight: sizes.lineHeight }}>
                   {sub}
                 </span>
               )}

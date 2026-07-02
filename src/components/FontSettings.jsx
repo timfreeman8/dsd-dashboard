@@ -22,44 +22,44 @@ const FONT_ROLE_CONTROLS = [
 ]
 
 const FONT_CONTROLS = [
-  { key: 'headerTitle',     label: 'Header Title',      min: 10, max: 60 },
-  { key: 'headerTab',       label: 'Header Tabs',       min: 8,  max: 40 },
-  { key: 'headerTimestamp', label: 'Timestamp',         min: 8,  max: 40 },
-  { key: 'summaryLabel',    label: 'KPI Label',         min: 8,  max: 40 },
-  { key: 'summaryValue',    label: 'KPI Value',         min: 14, max: 80 },
-  { key: 'summarySubLabel',  label: 'KPI Sub-label',    min: 8,  max: 40 },
-  { key: 'summarySubLabel2', label: 'KPI Sub-label 2',  min: 8,  max: 40 },
-  { key: 'tableHeader',     label: 'Column Header',     min: 8,  max: 40 },
-  { key: 'tableSubHeader',  label: 'Column Sub-header', min: 8,  max: 30 },
-  { key: 'sectionLabel',    label: 'Section Label',     min: 8,  max: 40 },
-  { key: 'vendorName',      label: 'Vendor Name',       min: 10, max: 40 },
-  { key: 'vendorLogoSize',  label: 'Vendor Logo Size',  min: 20, max: 100 },
-  { key: 'vendorMeta',      label: 'Vendor Meta',       min: 8,  max: 30 },
-  { key: 'tableValue',      label: 'Table Values',      min: 10, max: 80 },
+  { key: 'headerTitle',     label: 'Header Title',      min: 10, max: 60,  highlightKey: 'headerTitle'      },
+  { key: 'headerTab',       label: 'Header Tabs',       min: 8,  max: 40,  highlightKey: 'headerTab'        },
+  { key: 'headerTimestamp', label: 'Timestamp',         min: 8,  max: 40,  highlightKey: 'headerTimestamp'  },
+  { key: 'summaryLabel',    label: 'KPI Label',         min: 8,  max: 40,  highlightKey: 'summaryLabel'     },
+  { key: 'summaryValue',    label: 'KPI Value',         min: 14, max: 80,  highlightKey: 'summaryValue'     },
+  { key: 'summarySubLabel',  label: 'KPI Sub-label',    min: 8,  max: 40,  highlightKey: 'summarySubLabel'  },
+  { key: 'summarySubLabel2', label: 'KPI Sub-label 2',  min: 8,  max: 40,  highlightKey: 'summarySubLabel2' },
+  { key: 'tableHeader',     label: 'Column Header',     min: 8,  max: 40,  highlightKey: 'tableHeader'      },
+  { key: 'tableSubHeader',  label: 'Column Sub-header', min: 8,  max: 30,  highlightKey: 'tableSubHeader'   },
+  { key: 'sectionLabel',    label: 'Section Label',     min: 8,  max: 40,  highlightKey: 'sectionLabel'     },
+  { key: 'vendorName',      label: 'Vendor Name',       min: 10, max: 40,  highlightKey: 'vendorName'       },
+  { key: 'vendorLogoSize',  label: 'Vendor Logo Size',  min: 20, max: 100, highlightKey: 'vendorLogoSize'   },
+  { key: 'vendorMeta',      label: 'Vendor Meta',       min: 8,  max: 30,  highlightKey: 'vendorMeta'       },
+  { key: 'tableValue',      label: 'Table Values',      min: 10, max: 80,  highlightKey: 'tableValue'       },
 ]
 
 const WELCOME_FONT_CONTROLS = [
-  { key: 'welcomeHeadingSize',  label: 'Welcome Heading',    min: 24, max: 120 },
-  { key: 'welcomeLogoH',        label: 'Vendor Logo Height', min: 40, max: 200 },
-  { key: 'welcomeSectionTitle', label: 'Section Title',      min: 10, max: 50  },
-  { key: 'welcomeKpiLabel',     label: 'KPI Label',          min: 8,  max: 40  },
-  { key: 'welcomeKpiValue',     label: 'KPI Value',          min: 14, max: 80  },
-  { key: 'welcomeUpliftText',   label: 'Uplift Text',        min: 10, max: 40  },
-  { key: 'welcomeColHeader',    label: 'Column Header',      min: 8,  max: 40  },
-  { key: 'welcomeRowPrimary',   label: 'Row Primary (UPC)',  min: 10, max: 40  },
-  { key: 'welcomeRowValue',     label: 'Row Value',          min: 10, max: 60  },
-  { key: 'welcomeRecTitle',     label: 'Rec. Title',         min: 10, max: 40  },
-  { key: 'welcomeRecDesc',      label: 'Rec. Description',   min: 8,  max: 36  },
+  { key: 'welcomeHeadingSize',  label: 'Welcome Heading',    min: 24, max: 120, highlightKey: 'welcomeHeadingSize'  },
+  { key: 'welcomeLogoH',        label: 'Vendor Logo Height', min: 40, max: 200, highlightKey: 'welcomeLogoH'        },
+  { key: 'welcomeSectionTitle', label: 'Section Title',      min: 10, max: 50,  highlightKey: 'welcomeSectionTitle' },
+  { key: 'welcomeKpiLabel',     label: 'KPI Label',          min: 8,  max: 40,  highlightKey: 'welcomeKpiLabel'     },
+  { key: 'welcomeKpiValue',     label: 'KPI Value',          min: 14, max: 80,  highlightKey: 'welcomeKpiValue'     },
+  { key: 'welcomeUpliftText',   label: 'Uplift Text',        min: 10, max: 40,  highlightKey: 'welcomeUpliftText'   },
+  { key: 'welcomeColHeader',    label: 'Column Header',      min: 8,  max: 40,  highlightKey: 'welcomeColHeader'    },
+  { key: 'welcomeRowPrimary',   label: 'Row Primary (UPC)',  min: 10, max: 40,  highlightKey: 'welcomeRowPrimary'   },
+  { key: 'welcomeRowValue',     label: 'Row Value',          min: 10, max: 60,  highlightKey: 'welcomeRowValue'     },
+  { key: 'welcomeRecTitle',     label: 'Rec. Title',         min: 10, max: 40,  highlightKey: 'welcomeRecTitle'     },
+  { key: 'welcomeRecDesc',      label: 'Rec. Description',   min: 8,  max: 36,  highlightKey: 'welcomeRecDesc'      },
 ]
 
 const SS_FONT_CONTROLS = [
-  { key: 'ssPanelTitle', label: 'Panel Title',       min: 10, max: 50 },
-  { key: 'ssColHeader',  label: 'Column Header',     min: 8,  max: 40 },
-  { key: 'ssErLabel',    label: 'KPI Label',         min: 8,  max: 40 },
-  { key: 'ssErValue',    label: 'KPI Value',         min: 14, max: 80 },
-  { key: 'ssRowUpc',     label: 'Row Primary Text',  min: 10, max: 40 },
-  { key: 'ssRowDesc',    label: 'Row Secondary Text',min: 8,  max: 40 },
-  { key: 'ssRowValue',   label: 'Row Value (top panels)', min: 10, max: 60 },
+  { key: 'ssPanelTitle', label: 'Panel Title',            min: 10, max: 50, highlightKey: 'ssPanelTitle' },
+  { key: 'ssColHeader',  label: 'Column Header',          min: 8,  max: 40, highlightKey: 'ssColHeader'  },
+  { key: 'ssErLabel',    label: 'KPI Label',              min: 8,  max: 40, highlightKey: 'ssErLabel'    },
+  { key: 'ssErValue',    label: 'KPI Value',              min: 14, max: 80, highlightKey: 'ssErValue'    },
+  { key: 'ssRowUpc',     label: 'Row Primary Text',       min: 10, max: 40, highlightKey: 'ssRowUpc'     },
+  { key: 'ssRowDesc',    label: 'Row Secondary Text',     min: 8,  max: 40, highlightKey: 'ssRowDesc'    },
+  { key: 'ssRowValue',   label: 'Row Value (top panels)', min: 10, max: 60, highlightKey: 'ssRowValue'   },
 ]
 
 const SS_COLUMNS = {
@@ -83,8 +83,17 @@ const SPACING_CONTROLS = [
 function Slider({ control, value, onChange }) {
   const { min, max, step = 1, decimals = 0 } = control
   const display = decimals > 0 ? value.toFixed(decimals) : value
+
+  function setHighlight(on) {
+    const key = control.highlightKey
+    if (!key) return
+    document.querySelectorAll(`[data-skey="${key}"]`).forEach(el =>
+      el.classList.toggle('skey-hl', on)
+    )
+  }
+
   return (
-    <div>
+    <div onMouseEnter={() => setHighlight(true)} onMouseLeave={() => setHighlight(false)}>
       <div className="flex items-center justify-between mb-1">
         <label className="text-xs text-[#ccc]">{control.label}</label>
         <span className="text-xs font-mono text-white w-10 text-right">{display}</span>
