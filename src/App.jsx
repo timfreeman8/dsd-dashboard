@@ -25,12 +25,15 @@ function Dashboard({ timerDuration, setTimerDuration }) {
   const [progressKey, setProgressKey] = useState(0)
   const [checkingInId, setCheckingInId]   = useState(null)
   const [checkingOutId, setCheckingOutId] = useState(null)
+  const [recentlyCheckedInId, setRecentlyCheckedInId]   = useState(null)
+  const [recentlyCheckedOutId, setRecentlyCheckedOutId] = useState(null)
   const { sizes } = useFonts()
 
   function handleCheckIn() {
     const vendor = vendors.find(v => v.status === 'not-checked-in')
     if (!vendor) return
     setCheckingInId(vendor.id)
+    const dur = sizes.animRowDuration ?? 400
     setTimeout(() => {
       setVendors(prev => {
         const idx = prev.findIndex(v => v.id === vendor.id)
@@ -44,13 +47,16 @@ function Dashboard({ timerDuration, setTimerDuration }) {
         return [target, ...rest]
       })
       setCheckingInId(null)
-    }, (sizes.animRowDuration ?? 400) + 220)
+      setRecentlyCheckedInId(vendor.id)
+      setTimeout(() => setRecentlyCheckedInId(null), dur)
+    }, dur + 220)
   }
 
   function handleCheckOut() {
     const checkedIn = vendors.filter(v => v.status === 'checked-in')
     if (checkedIn.length === 0) return
     const targetId = checkedIn[checkedIn.length - 1].id
+    const dur = sizes.animRowDuration ?? 400
     setCheckingOutId(targetId)
     setTimeout(() => {
       setVendors(prev =>
@@ -61,7 +67,9 @@ function Dashboard({ timerDuration, setTimerDuration }) {
         )
       )
       setCheckingOutId(null)
-    }, (sizes.animRowDuration ?? 400) + 220)
+      setRecentlyCheckedOutId(targetId)
+      setTimeout(() => setRecentlyCheckedOutId(null), dur)
+    }, dur + 220)
   }
 
   function handleReset() {
@@ -127,7 +135,7 @@ function Dashboard({ timerDuration, setTimerDuration }) {
         {activeTab === 'vendor-management' ? (
           <>
             <StoreSummary />
-            <VendorInsights vendors={vendors} checkingInId={checkingInId} checkingOutId={checkingOutId} />
+            <VendorInsights vendors={vendors} checkingInId={checkingInId} checkingOutId={checkingOutId} recentlyCheckedInId={recentlyCheckedInId} recentlyCheckedOutId={recentlyCheckedOutId} />
           </>
         ) : (
           <SalesAndShrink />
