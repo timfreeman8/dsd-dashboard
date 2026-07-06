@@ -42,6 +42,8 @@ export const defaults = {
   animRowDuration:  400,        // ms
   animPageStyle:    'slide',    // slide | fade | rise | none
   animPageDuration: 400,        // ms
+  animSsStyle:      'slide',    // slide | fade | rise | none  (S&S panel pagination)
+  animSsDuration:   400,        // ms
   animEasing:       'ease-out', // ease-out | ease-in-out | ease | linear | spring
   // Sales & Shrink font sizes
   ssPanelTitle:     16,             // panel section heading (e.g. "Reclamation (Previous Week)")
@@ -105,9 +107,11 @@ export function FontProvider({ children }) {
     const r = document.documentElement
     r.style.setProperty('--anim-row-dur',   `${sizes.animRowDuration ?? 400}ms`)
     r.style.setProperty('--anim-page-dur',  `${sizes.animPageDuration ?? 400}ms`)
+    r.style.setProperty('--anim-ss-dur',    `${sizes.animSsDuration ?? 400}ms`)
     r.style.setProperty('--anim-row-ease',  EASING_MAP[sizes.animEasing] ?? 'ease-out')
     r.style.setProperty('--anim-page-ease', EASING_MAP[sizes.animEasing] ?? 'ease-out')
-  }, [sizes.animRowDuration, sizes.animPageDuration, sizes.animEasing])
+    r.style.setProperty('--anim-ss-ease',   EASING_MAP[sizes.animEasing] ?? 'ease-out')
+  }, [sizes.animRowDuration, sizes.animPageDuration, sizes.animSsDuration, sizes.animEasing])
 
   return (
     <FontContext.Provider value={{ sizes, set, save, reset }}>

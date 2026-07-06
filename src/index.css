@@ -7,6 +7,8 @@
   --anim-row-ease: ease-out;
   --anim-page-dur: 400ms;
   --anim-page-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --anim-ss-dur: 400ms;
+  --anim-ss-ease: ease-out;
 }
 
 body {
@@ -70,6 +72,11 @@ body {
 .page-slide-in { animation: pageSlideIn var(--anim-page-dur) var(--anim-page-ease) both; }
 .page-fade-in  { animation: pageFadeIn  var(--anim-page-dur) var(--anim-page-ease) both; }
 .page-rise-in  { animation: pageRiseIn  var(--anim-page-dur) var(--anim-page-ease) both; }
+
+/* ── S&S panel pagination transitions ────────────────────────────────── */
+.ss-slide-in { animation: pageSlideIn var(--anim-ss-dur) var(--anim-ss-ease) both; }
+.ss-fade-in  { animation: pageFadeIn  var(--anim-ss-dur) var(--anim-ss-ease) both; }
+.ss-rise-in  { animation: pageRiseIn  var(--anim-ss-dur) var(--anim-ss-ease) both; }
 
 /* ── Progress bars ────────────────────────────────────────────────────── */
 @keyframes fillProgress    { from { width: 0%; } to { width: 100%; } }

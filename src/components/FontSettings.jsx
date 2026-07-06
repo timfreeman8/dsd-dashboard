@@ -415,6 +415,16 @@ export default function FontSettings({ timerDuration, setTimerDuration }) {
                       ])}
                       <Slider control={{ label: 'Duration', min: 50, max: 1000, step: 25 }} value={sizes.animPageDuration} onChange={v => set('animPageDuration', v)} />
                     </div>
+                    <div className="space-y-3 pb-3 border-b border-[#333]">
+                      <p className="text-[10px] text-[#555] uppercase tracking-wider">S&amp;S Panel Pagination</p>
+                      {styleSelect('animSsStyle', 'Style', [
+                        ['slide', 'Slide'],
+                        ['fade',  'Fade'],
+                        ['rise',  'Rise'],
+                        ['none',  'None'],
+                      ])}
+                      <Slider control={{ label: 'Duration', min: 50, max: 1000, step: 25 }} value={sizes.animSsDuration ?? 400} onChange={v => set('animSsDuration', v)} />
+                    </div>
                     <div className="space-y-3">
                       <p className="text-[10px] text-[#555] uppercase tracking-wider">Easing</p>
                       {styleSelect('animEasing', 'Curve', [

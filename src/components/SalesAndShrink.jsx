@@ -96,12 +96,12 @@ function ReclamationPanel({ sizes, outerPageKey }) {
     ssPanelTitle, ssColHeader, ssErLabel, ssErValue,
     ssRowUpc, ssRowDesc, ssRowValue,
     fontHeading, fontDisplay, fontBody, lineHeight,
-    ssErColFlexes, ssPagDuration, animPageStyle,
+    ssErColFlexes, ssPagDuration, animSsStyle,
   } = sizes
 
   const flexes   = ssErColFlexes ?? [3, 2, 1]
   const pageDur  = ssPagDuration ?? 5
-  const pageAnim = { slide: 'page-slide-in', fade: 'page-fade-in', rise: 'page-rise-in', none: '' }[animPageStyle ?? 'slide'] ?? 'page-slide-in'
+  const pageAnim = { slide: 'ss-slide-in', fade: 'ss-fade-in', rise: 'ss-rise-in', none: '' }[animSsStyle ?? 'slide'] ?? 'ss-slide-in'
 
   const { totalReclaim, reclaimHold, events } = reclamation
 
@@ -221,12 +221,12 @@ function TopLossNoMarkdownsPanel({ sizes, outerPageKey }) {
     ssPanelTitle, ssColHeader, ssErLabel, ssErValue,
     ssRowUpc, ssRowDesc, ssRowValue,
     fontHeading, fontDisplay, fontBody, lineHeight,
-    ssZsColFlexes, ssPagDuration, animPageStyle,
+    ssZsColFlexes, ssPagDuration, animSsStyle,
   } = sizes
 
   const flexes   = ssZsColFlexes ?? [3, 1, 1]
   const pageDur  = ssPagDuration ?? 5
-  const pageAnim = { slide: 'page-slide-in', fade: 'page-fade-in', rise: 'page-rise-in', none: '' }[animPageStyle ?? 'slide'] ?? 'page-slide-in'
+  const pageAnim = { slide: 'ss-slide-in', fade: 'ss-fade-in', rise: 'ss-rise-in', none: '' }[animSsStyle ?? 'slide'] ?? 'ss-slide-in'
 
   const { itemsWithZeroSales, totalShippedCost, items } = topLossNoMarkdowns
 
@@ -346,12 +346,12 @@ function DepartmentMarkdownsPanel({ sizes, outerPageKey }) {
   const {
     ssPanelTitle, ssColHeader, ssErLabel, ssErValue, ssRowUpc,
     fontHeading, fontDisplay, fontBody, lineHeight,
-    ssTlColFlexes, ssPagDuration, animPageStyle,
+    ssTlColFlexes, ssPagDuration, animSsStyle,
   } = sizes
 
   const flexes   = ssTlColFlexes ?? [2, 1, 1, 1, 1, 1]
   const pageDur  = ssPagDuration ?? 5
-  const pageAnim = { slide: 'page-slide-in', fade: 'page-fade-in', rise: 'page-rise-in', none: '' }[animPageStyle ?? 'slide'] ?? 'page-slide-in'
+  const pageAnim = { slide: 'ss-slide-in', fade: 'ss-fade-in', rise: 'ss-rise-in', none: '' }[animSsStyle ?? 'slide'] ?? 'ss-slide-in'
 
   const { kpis, departments } = departmentMarkdowns
 
