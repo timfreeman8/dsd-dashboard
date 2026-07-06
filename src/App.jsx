@@ -26,6 +26,8 @@ function Dashboard({ timerDuration, setTimerDuration }) {
   const [progressKey, setProgressKey] = useState(0)
   const [checkingInId, setCheckingInId]   = useState(null)
   const [checkingOutId, setCheckingOutId] = useState(null)
+  const [recentlyCheckedInId, setRecentlyCheckedInId]   = useState(null)
+  const [recentlyCheckedOutId, setRecentlyCheckedOutId] = useState(null)
   const [welcomeVendor, setWelcomeVendor] = useState(null) // { vendor, checkedInAt }
   const { sizes } = useFonts()
 
@@ -33,6 +35,7 @@ function Dashboard({ timerDuration, setTimerDuration }) {
     const vendor = vendors.find(v => v.status === 'not-checked-in')
     if (!vendor) return
     setCheckingInId(vendor.id)
+    const dur = sizes.animRowDuration ?? 400
     setTimeout(() => {
       const checkedInAt = currentTime()
       setVendors(prev => {
@@ -47,14 +50,17 @@ function Dashboard({ timerDuration, setTimerDuration }) {
         return [target, ...rest]
       })
       setCheckingInId(null)
+      setRecentlyCheckedInId(vendor.id)
       setWelcomeVendor({ vendor, checkedInAt })
-    }, (sizes.animRowDuration ?? 400) + 220)
+      setTimeout(() => setRecentlyCheckedInId(null), dur)
+    }, dur + 220)
   }
 
   function handleCheckOut() {
     const checkedIn = vendors.filter(v => v.status === 'checked-in')
     if (checkedIn.length === 0) return
     const targetId = checkedIn[checkedIn.length - 1].id
+    const dur = sizes.animRowDuration ?? 400
     setCheckingOutId(targetId)
     setTimeout(() => {
       setVendors(prev =>
@@ -65,7 +71,9 @@ function Dashboard({ timerDuration, setTimerDuration }) {
         )
       )
       setCheckingOutId(null)
-    }, (sizes.animRowDuration ?? 400) + 220)
+      setRecentlyCheckedOutId(targetId)
+      setTimeout(() => setRecentlyCheckedOutId(null), dur)
+    }, dur + 220)
   }
 
   function handleReset() {
@@ -131,7 +139,7 @@ function Dashboard({ timerDuration, setTimerDuration }) {
         {activeTab === 'vendor-management' ? (
           <>
             <StoreSummary />
-            <VendorInsights vendors={vendors} checkingInId={checkingInId} checkingOutId={checkingOutId} />
+            <VendorInsights vendors={vendors} checkingInId={checkingInId} checkingOutId={checkingOutId} recentlyCheckedInId={recentlyCheckedInId} recentlyCheckedOutId={recentlyCheckedOutId} />
           </>
         ) : (
           <SalesAndShrink />

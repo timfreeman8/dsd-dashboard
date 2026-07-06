@@ -187,7 +187,7 @@ export const COLUMNS = [
   { heading: 'Weeks\nWithout Credit',         sub: 'Goal = 0',      dataKey: 'weeksWithoutCredit', goal: null,                   format: null,      forceColorFn: v => v === 0 ? GREEN : RED },
 ]
 
-export default function VendorInsights({ vendors, checkingInId, checkingOutId }) {
+export default function VendorInsights({ vendors, checkingInId, checkingOutId, recentlyCheckedInId, recentlyCheckedOutId }) {
   const { sizes } = useFonts()
   const pageDuration = sizes.pageDuration ?? 5
 
@@ -264,7 +264,6 @@ export default function VendorInsights({ vendors, checkingInId, checkingOutId })
   const totalPages      = Math.max(1, Math.ceil(paginatedVendors.length / rowsPerPage))
   const [currentPage, setCurrentPage] = useState(0)
   const [pageKey,     setPageKey]     = useState(0)
-  const [topKey,      setTopKey]      = useState(0)
   const [timerKey,    setTimerKey]    = useState(0)
 
   const safePage      = Math.min(currentPage, totalPages - 1)
@@ -292,30 +291,16 @@ export default function VendorInsights({ vendors, checkingInId, checkingOutId })
     if (prevCheckingInId.current !== null && checkingInId === null) {
       setCurrentPage(0)
       setPageKey(k => k + 1)
-      setTopKey(k => k + 1)
       setTimerKey(k => k + 1)
     }
     prevCheckingInId.current = checkingInId
   }, [checkingInId])
 
-  // ── Section-change animation tracking ─────────────────────────────────────
-  const prevStatusRef = useRef({})
-  const newlyMovedIds = new Set()
-  vendors.forEach(v => {
-    const prev = prevStatusRef.current[v.id]
-    if (prev && prev !== v.status) newlyMovedIds.add(v.id)
-  })
-  useEffect(() => {
-    const next = {}
-    vendors.forEach(v => { next[v.id] = v.status })
-    prevStatusRef.current = next
-  })
-
   const rowStyle = sizes.animRowStyle ?? 'slide'
 
   function getAnimClass(v) {
     const isExiting  = v.id === checkingInId || v.id === checkingOutId
-    const isEntering = newlyMovedIds.has(v.id)
+    const isEntering = v.id === recentlyCheckedInId || v.id === recentlyCheckedOutId
 
     if (rowStyle === 'none') return undefined
 
@@ -417,7 +402,7 @@ export default function VendorInsights({ vendors, checkingInId, checkingOutId })
 
       {/* ── Always-visible: checked-in ── */}
       {topVendors.length > 0 && (
-        <div key={topKey} className="flex-shrink-0 flex flex-col gap-0.5">
+        <div className="flex-shrink-0 flex flex-col gap-0.5">
           {renderTopItems()}
         </div>
       )}
